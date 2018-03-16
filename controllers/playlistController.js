@@ -1,5 +1,5 @@
 // user Controller
-import Boom from 'boom';
+const Boom = require('boom');
 import PlaylistModel from '../models/playlistModel';
 import SongModel from '../models/songsModel';
 import axios from 'axios';

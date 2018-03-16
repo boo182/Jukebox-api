@@ -1,15 +1,15 @@
-// songssRoutes.js
-import Boom from 'Boom';
+// songs Routes.js
+const Boom = require('boom');
 import express from 'express';
 import SongsController from '../controllers/songsController'
 
 
 const router = express.Router();
 
-router.post('/add', async (req, res) => {
-    const newSong = await SongsController.addSong(req.body.song);
-    res.json(newSong);
-});
+// router.post('/add', async (req, res) => {
+//     const newSong = await SongsController.addSong(req.body.song);
+//     res.json(newSong);
+// });
 
 
 router.get('/:id', async (req, res) => {

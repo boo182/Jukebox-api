@@ -1,7 +1,7 @@
-// songssRoutes.js
-import Boom from 'Boom';
+// songs sRoutes.js
+const Boom = require('boom');
 import express from 'express';
-import PlaylistController from '../controllers/PlaylistController'
+import PlaylistController from '../controllers/playlistController';
 
 
 const router = express.Router();

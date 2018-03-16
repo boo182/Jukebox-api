@@ -1,10 +1,8 @@
 // user Controller
-import Boom from 'boom';
+const Boom = require('boom');
 import SongsModel from '../models/songsModel';
 import YoutubeFetcher from '../utils/youtubeFetcher';
 
-const youtubeApi = 'https://www.googleapis.com/youtube/v3/videos?id=';
-const key = 'AIzaSyDu1nzbma-b_vkLfLb5IgtlJgv9kpCX2rw';
 
 class songsController {
     async getSong(songId) {
@@ -20,6 +18,7 @@ class songsController {
 
     async addSong(url) {
         const fetchYoutubeObject = await YoutubeFetcher.fetcher(url);
+        console.log(fetchYoutubeObject);
         const songAdded = await SongsModel.addSong(fetchYoutubeObject, url);
         return songAdded;
     }

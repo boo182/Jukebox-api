@@ -1,7 +1,6 @@
 import knex from '../db';
 import SongModel from './songsModel';
-import Boom from 'boom';
-
+const Boom = require('boom');
 
 class playlistModel {
 
@@ -35,7 +34,7 @@ class playlistModel {
         return await this.getPlaylist();
     }
     async deleteFromSavedPlaylist(songId, playlistName) {
-        const deleteSong = await knex('saved-playlists')
+        const deleteSong = await knex('saved_playlists')
         .delete()
         .where('playlistName', playlistName)
         .where('songId', songId)
@@ -44,7 +43,7 @@ class playlistModel {
         return await this.getPlaylistByName(playlistName);
     }
     async checkPlaylistName(playlistName) {
-        const playlistAlreadyExists = await knex('saved-playlists')
+        const playlistAlreadyExists = await knex('saved_playlists')
         .select('playlistName')
         .where('playlistName', playlistName)
         .catch(err => Boom.badRequest(err.message));
@@ -52,7 +51,7 @@ class playlistModel {
         return playlistAlreadyExists.length !== 0 || false;
     }
     async checkIfSongIsInPlaylist(songId, playlistName) {
-        const doesSongExists = await knex('saved-playlists')
+        const doesSongExists = await knex('saved_playlists')
         .select()
         .where('playlistName', playlistName)
         .where('songId', songId)
@@ -67,7 +66,7 @@ class playlistModel {
             return Boom.unauthorized('Playlist name already exists');
         } 
 
-        const savedPlaylist = await knex('saved-playlists')
+        const savedPlaylist = await knex('saved_playlists')
         .insert(ids)
         .catch(err => Boom.badRequest(err.message));
         return savedPlaylist;
@@ -75,8 +74,8 @@ class playlistModel {
 
     async getPlaylistByName(playlistName) {
         const playlist = await knex.select('url', 'name', 'songId', 'duration', 'songPosition', 'playlistName')
-        .from('saved-playlists')
-        .innerJoin('songs', 'saved-playlists.songId', 'songs.id')
+        .from('saved_playlists')
+        .innerJoin('songs', 'saved_playlists.songId', 'songs.id')
         .where('playlistName', playlistName)
         .catch(err => Boom.badRequest(err.message));
 
@@ -84,7 +83,7 @@ class playlistModel {
     }
 
     async addSongToSavedPlaylist(songId, playlistName, songPosition) {
-        const songToAdd = await knex('saved-playlists')
+        const songToAdd = await knex('saved_playlists')
         .insert({playlistName, songId, songPosition})
         .catch(err => Boom.badRequest(err.message));
 

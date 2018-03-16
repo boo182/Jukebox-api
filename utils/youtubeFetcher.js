@@ -1,11 +1,11 @@
-import Boom from 'boom';
+const Boom = require('boom');
 import axios from 'axios';
 import { URL } from 'url';
-import { youtubeAPIKey } from '../env';
+require('dotenv').config();
+
 
 const youtubeApi = 'https://www.googleapis.com/youtube/v3/videos?id=';
-const key = youtubeAPIKey;
-
+const key = process.env.YT_KEY;
 
 class youtubeFetcher {
     async fetcher(url) {
