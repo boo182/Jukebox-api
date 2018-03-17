@@ -6,8 +6,8 @@ import PlaylistController from '../controllers/playlistController';
 
 const router = express.Router();
 
-router.get('/', async (req, res) => {
-    const playlist = await PlaylistController.getPlaylist();
+router.get('/:playlistName', async (req, res) => {
+    const playlist = await PlaylistController.getPlaylist(req.params.playlistName);
     res.json(playlist);
 })
 

@@ -9,7 +9,6 @@ const key = process.env.YT_KEY;
 
 class youtubeFetcher {
     async fetcher(url) {
-        console.log(url);
         try {
             const myURL = new URL(url);
             const param = myURL.searchParams.get('v');

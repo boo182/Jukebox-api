@@ -18,8 +18,12 @@ class playlistController {
       return addedSong; 
     };
 
-    async getPlaylist() {
-        const playlist = await PlaylistModel.getPlaylist();
+    async getPlaylist(playlistName) {
+        if(playlistName === 'current') {
+            const playlist = await PlaylistModel.getPlaylist();
+            return playlist;
+        }
+        const playlist = await PlaylistModel.getPlaylistByName(playlistName);
         return playlist;
     }
 

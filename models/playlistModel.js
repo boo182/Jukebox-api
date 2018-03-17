@@ -4,8 +4,9 @@ const Boom = require('boom');
 
 class playlistModel {
 
-    async getPlaylist() {
-        const playlist = await knex.select('url', 'name', 'songId', 'duration', 'songPosition', 'playlist')
+    async getPlaylist(playlistName) {
+        const playlist = await knex
+        .select('url', 'title', 'songId', 'duration', 'songPosition', 'playlist', 'thumbnails')
         .from('playlist')
         .innerJoin('songs', 'playlist.songId', 'songs.id')
         .catch(err => Boom.badRequest(err.message));
@@ -73,7 +74,8 @@ class playlistModel {
     }
 
     async getPlaylistByName(playlistName) {
-        const playlist = await knex.select('url', 'name', 'songId', 'duration', 'songPosition', 'playlistName')
+        const playlist = await knex
+        .select('url', 'title', 'songId', 'duration', 'songPosition', 'playlistName')
         .from('saved_playlists')
         .innerJoin('songs', 'saved_playlists.songId', 'songs.id')
         .where('playlistName', playlistName)

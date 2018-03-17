@@ -11,7 +11,6 @@ class songsController {
     };
 
     async getAllSongs() {
-        console.log('controller')
         const songs = await SongsModel.getAllSongs();
         return songs; 
     };

@@ -3,13 +3,15 @@ import knex from '../db';
 class songsModel {
     async addSong(json, url) {
         const data = JSON.stringify(json);
+        console.log(json.items[0].snippet);
         const songAdded = await knex('songs')
          .insert({
              url,
-             name: json.items[0].snippet.title,
+             title: json.items[0].snippet.title,
              data,
              addedDate: new Date(),
              duration: json.items[0].contentDetails.duration,
+             thumbnails: json.items[0].snippet.thumbnails.default.url,
          })
          .catch(err => {
             console.error(err);
@@ -26,7 +28,7 @@ class songsModel {
             const songData = JSON.parse(item.data);
             return {
                 id: item.id,
-                title: item.name,
+                title: item.title,
                 url: item.url,
                 added: item.addedDate,
                 thumbnails: songData.items[0].snippet.thumbnails.default,
@@ -42,7 +44,7 @@ class songsModel {
             const songData = JSON.parse(item.data);
             return {
                 id: item.id,
-                title: item.name,
+                title: item.title,
                 url: item.url,
                 added: item.addedDate,
                 thumbnails: songData.items[0].snippet.thumbnails.default,
