@@ -14,6 +14,7 @@ class youtubeFetcher {
             const param = myURL.searchParams.get('v');
             const answer = axios.get(`${youtubeApi}${param}&part=snippet,ContentDetails&key=${key}`)
             .then(res => res.data);
+            console.log(answer);
             return answer;
         } catch(error) {
             return Boom.badRequest(error.message);

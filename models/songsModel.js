@@ -6,7 +6,7 @@ class songsModel {
         console.log(json.items[0].snippet);
         const songAdded = await knex('songs')
          .insert({
-             url,
+             url: `https://www.youtube.com/embed/${json.items[0].id}`,
              title: json.items[0].snippet.title,
              data,
              addedDate: new Date(),

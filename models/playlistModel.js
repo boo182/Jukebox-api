@@ -29,7 +29,7 @@ class playlistModel {
     async deleteFromPlaylist(songId) {
         const deleteSong = await knex('playlist')
         .delete()
-        .where('id', songId)
+        .where('songId', songId)
         .catch(err => Boom.badRequest(err.message));
 
         return await this.getPlaylist();

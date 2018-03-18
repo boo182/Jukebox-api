@@ -12,6 +12,7 @@ router.get('/:playlistName', async (req, res) => {
 })
 
 router.post('/add', async (req, res) => {
+    console.log(req.body);
     const newSong = await PlaylistController.addSongToPlaylist(req.body.song, req.body.songPosition);
     res.json(newSong);
 });
